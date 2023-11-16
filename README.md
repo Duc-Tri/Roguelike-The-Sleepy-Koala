@@ -6,7 +6,7 @@ https://www.youtube.com/watch?v=_24TfxaPWlI&list=PLzbRW-gm6o9ZxxDcx2u2Oj-Vap4HHQ
 
 0:06:48	P01 - Instantiating the '@' symbol and moving it around
 
-0:09:36	P02 - The generic Entity, the corrections%2C and the map
+0:09:36	P02 - The generic Entity, the corrections, and the map
 
 0:07:51	P03 - Generating a Dungeon
 
