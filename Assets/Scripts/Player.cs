@@ -1,10 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, Controls.IPlayerActions
 {
     private Controls controls;
     [SerializeField] private bool moveKeyHeld;
@@ -13,31 +10,14 @@ public class Player : MonoBehaviour
 
     private void OnEnable()
     {
-        controls.Enable();
-        controls.Player.Movement.started += OnMovement;
-        controls.Player.Movement.canceled += OnMovement;
-        controls.Player.Exit.performed += OnExit;
+        controls.Player.SetCallbacks(this);
+        controls.Player.Enable();
     }
 
     private void OnDisable()
     {
-        controls.Disable();
-        controls.Player.Movement.started -= OnMovement;
-        controls.Player.Movement.canceled -= OnMovement;
-        controls.Player.Exit.performed -= OnExit;
-    }
-
-    private void OnExit(InputAction.CallbackContext context)
-    {
-        Debug.Log("EXIT");
-    }
-
-    private void OnMovement(InputAction.CallbackContext context)
-    {
-        if (context.started)
-            moveKeyHeld = true;
-        else if (context.canceled)
-            moveKeyHeld = false;
+        controls.Player.SetCallbacks(null);
+        controls.Player.Disable();
     }
 
     private void FixedUpdate()
@@ -48,7 +28,35 @@ public class Player : MonoBehaviour
 
     private void MovePlayer()
     {
-        transform.position += (Vector3)controls.Player.Movement.ReadValue<Vector2>();
-        GameManager.instance.EndTurn();
+        Vector2 direction = controls.Player.Movement.ReadValue<Vector2>();
+        Vector2 roundedDirection = new Vector2(Mathf.Round(direction.x), Mathf.Round(direction.y));
+        Vector3 futurePosition = transform.position + (Vector3)roundedDirection;
+
+        if (IsValidPosition(futurePosition))
+            Action.MovementAction(GetComponent<Entity>(), roundedDirection);
+    }
+
+    private bool IsValidPosition(Vector3 futurePosition)
+    {
+        Vector3Int gridPosition = MapManager.instance.FloorMap.WorldToCell(futurePosition);
+
+        if (!MapManager.instance.InBounds(gridPosition.x, gridPosition.y) || MapManager.instance.ObstacleMap.HasTile(gridPosition))
+            return false;
+
+        return true;
+    }
+
+    void Controls.IPlayerActions.OnMovement(InputAction.CallbackContext context)
+    {
+        if (context.started)
+            moveKeyHeld = true;
+        else if (context.canceled)
+            moveKeyHeld = false;
+    }
+
+    void Controls.IPlayerActions.OnExit(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            Action.EscapeAction();
     }
 }

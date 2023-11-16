@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +7,8 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     [SerializeField] private float time = 0.1f;
     [SerializeField] private bool isPlayerTurn = true;
+    [SerializeField] private int entityNum = 0;
+    [SerializeField] private List<Entity> entities = new List<Entity>();
 
     public bool IsPlayerTurn { get => isPlayerTurn; }
 
@@ -19,20 +20,40 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
     }
 
-    private void Start()
+    private void StartTurn()
     {
-        Instantiate(Resources.Load<GameObject>("Player")).name = "Player";
+        if (entities[entityNum].GetComponent<Player>())
+            isPlayerTurn = true;
+        else if (entities[entityNum].IsSentient)
+            Action.SkipAction(entities[entityNum]);
     }
 
     public void EndTurn()
     {
-        isPlayerTurn = false;
-        StartCoroutine(WaitForTurns());
+        if (entities[entityNum].GetComponent<Player>())
+            isPlayerTurn = false;
+
+        if (entityNum == entities.Count - 1)
+            entityNum = 0;
+        else
+            entityNum++;
+
+        StartCoroutine(TurnDelay());
     }
 
-    private IEnumerator WaitForTurns()
+    private IEnumerator TurnDelay()
     {
         yield return new WaitForSeconds(time);
-        isPlayerTurn = true;
+        StartTurn();
+    }
+
+    internal void InsertEntity(Entity entity, int index)
+    {
+        entities.Insert(index, entity);
+    }
+
+    internal void AddEntity(Entity entity)
+    {
+        entities.Add(entity);
     }
 }
