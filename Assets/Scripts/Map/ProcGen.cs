@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public sealed class ProcGen
 {
     public void GenerateDungeon(int mapWidth, int mapHeight, int roomMinSize, int roomMaxSize, int maxRooms, List<RectangularRoom> rooms)
     {
-        RectangularRoom oldRoom = null;
+        RectangularRoom newRoom, oldRoom = null;
 
         for (int roomNum = 0; roomNum < maxRooms; roomNum++)
         {
@@ -15,7 +16,7 @@ public sealed class ProcGen
             int roomX = Random.Range(0, mapWidth - roomWidth - 1);
             int roomY = Random.Range(0, mapHeight - roomHeight - 1);
 
-            RectangularRoom newRoom = new RectangularRoom(roomX, roomY, roomWidth, roomHeight);
+            newRoom = new RectangularRoom(roomX, roomY, roomWidth, roomHeight);
 
             if (newRoom.Overlaps(rooms))
             {
@@ -30,16 +31,12 @@ public sealed class ProcGen
                 {
                     if (x == roomX || y == roomY || x == roomX + roomWidth - 1 || y == roomY + roomHeight - 1)
                     {
-                        if (SetWallTileIfEmpty(new Vector3Int(x, y, 0)))
+                        if (SetWallTileIfEmpty(new Vector3Int(x, y)))
                             continue;
                     }
                     else
                     {
-                        if (MapManager.instance.ObstacleMap.GetTile(new Vector3Int(x, y, 0)))
-                        {
-                            MapManager.instance.ObstacleMap.SetTile(new Vector3Int(x, y, 0), null);
-                        }
-                        MapManager.instance.FloorMap.SetTile(new Vector3Int(x, y, 0), MapManager.instance.FloorTile);
+                        SetFloorTile(new Vector3Int(x, y));
                     }
                 }
             }
@@ -78,17 +75,14 @@ public sealed class ProcGen
 
         // generate the coordinates for this tunnel
         List<Vector2Int> tunnelCoords = new List<Vector2Int>();
-        BresenhamLine(oldRoomCenter, tunnelCorner, tunnelCoords);
-        BresenhamLine(tunnelCorner, newRoomCenter, tunnelCoords);
+        BresenhamLine.Compute(oldRoomCenter, tunnelCorner, tunnelCoords);
+        BresenhamLine.Compute(tunnelCorner, newRoomCenter, tunnelCoords);
 
         // set the tiles for this tunnel
         for (int i = 0; i < tunnelCoords.Count; i++)
         {
             Vector3Int pos = new Vector3Int(tunnelCoords[i].x, tunnelCoords[i].y, 0);
-            if (MapManager.instance.ObstacleMap.HasTile(pos))
-            {
-                MapManager.instance.ObstacleMap.SetTile(pos, null);
-            }
+            SetFloorTile(new Vector3Int(tunnelCoords[i].x, tunnelCoords[i].y));
 
             // set the floor tile
             MapManager.instance.FloorMap.SetTile(pos, MapManager.instance.FloorTile);
@@ -98,54 +92,33 @@ public sealed class ProcGen
             {
                 for (int y = tunnelCoords[i].y - 1; y <= tunnelCoords[i].y + 1; y++)
                 {
-                    if (SetWallTileIfEmpty(new Vector3Int(x, y, 0)))
+                    if (SetWallTileIfEmpty(new Vector3Int(x, y)))
                         continue;
                 }
             }
         }
     }
 
-    private void BresenhamLine(Vector2Int roomCenter, Vector2Int tunnelCorner, List<Vector2Int> tunnelCoords)
-    {
-        int x = roomCenter.x,
-            y = roomCenter.y;
-        int dx = Mathf.Abs(tunnelCorner.x - roomCenter.x),
-            dy = Mathf.Abs(tunnelCorner.y - roomCenter.y);
-        int sx = roomCenter.x < tunnelCorner.x ? 1 : -1,
-            sy = roomCenter.y < tunnelCorner.y ? 1 : -1;
-        int err = dx - dy;
-
-        while (true)
-        {
-            tunnelCoords.Add(new Vector2Int(x, y));
-            if (x == tunnelCorner.x && y == tunnelCorner.y)
-                break;
-
-            int e2 = 2 * err;
-            if (e2 > -dy)
-            {
-                err -= dy;
-                x += sx;
-            }
-
-            if (e2 < dx)
-            {
-                err += dx;
-                y += sy;
-            }
-        }
-    }
-
     private bool SetWallTileIfEmpty(Vector3Int pos)
     {
-        if (MapManager.instance.FloorMap.GetTile(new Vector3Int(pos.x, pos.y, 0)))
+        if (MapManager.instance.FloorMap.GetTile(pos))
         {
             return true;
         }
         else
         {
-            MapManager.instance.ObstacleMap.SetTile(new Vector3Int(pos.x, pos.y, 0), MapManager.instance.WallTile);
+            MapManager.instance.ObstacleMap.SetTile(pos, MapManager.instance.WallTile);
             return false;
         }
+    }
+
+    void SetFloorTile(Vector3Int pos)
+    {
+        if (MapManager.instance.ObstacleMap.GetTile(pos))
+        {
+            MapManager.instance.ObstacleMap.SetTile(pos, null);
+        }
+        MapManager.instance.FloorMap.SetTile(pos, MapManager.instance.FloorTile);
+
     }
 }

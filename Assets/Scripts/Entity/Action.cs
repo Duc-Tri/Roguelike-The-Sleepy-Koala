@@ -11,6 +11,7 @@ static public class Action
     {
         Debug.Log($"{entity.name} => {direction}");
         entity.Move(direction);
+        entity.UpdateFieldOfView();
         GameManager.instance.EndTurn();
     }
 

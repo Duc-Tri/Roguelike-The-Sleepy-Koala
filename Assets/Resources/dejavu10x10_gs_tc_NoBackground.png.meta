@@ -44,13 +44,13 @@ TextureImporter:
   lightmap: 0
   compressionQuality: 50
   spriteMode: 2
-  spriteExtrude: 1
+  spriteExtrude: 0
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 10
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 1
+  spriteGenerateFallbackPhysicsShape: 0
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -69,7 +69,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 512
+    maxTextureSize: 1024
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 2
@@ -3062,6 +3062,258 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: dejavu10x10_gs_tc_NoBackground_140
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 10
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c56ede510bc7304f8aaf8e31f7bb6aa
+      internalID: 1262068011
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dejavu10x10_gs_tc_NoBackground_141
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 10
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7302af8d1b30d84f88287e2b3fd89d1
+      internalID: 1076854347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dejavu10x10_gs_tc_NoBackground_142
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 10
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c75e81f589e4de94480d6aae65e88ce3
+      internalID: -510677994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dejavu10x10_gs_tc_NoBackground_143
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 10
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39db1f8d37b55344385a70156eea0274
+      internalID: -1756503635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dejavu10x10_gs_tc_NoBackground_144
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 10
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60cd3ea01be7e0b499a615f2215c6d63
+      internalID: 2120130544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dejavu10x10_gs_tc_NoBackground_145
+      rect:
+        serializedVersion: 2
+        x: 310
+        y: 10
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0fb032dbd69423c438506eb1cbc6d7a6
+      internalID: 2075781070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dejavu10x10_gs_tc_NoBackground_146
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 0
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 159a35d192c4de047b008d3181bcc21f
+      internalID: -1373448209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dejavu10x10_gs_tc_NoBackground_147
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 0
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0448af72315c9b842a3fec5d20722d17
+      internalID: 1676706451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dejavu10x10_gs_tc_NoBackground_148
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 0
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a477005d6d1789f44bce389f8d7e7605
+      internalID: 40344616
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dejavu10x10_gs_tc_NoBackground_149
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 0
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42492a3eaabb0eb4688ae1a020492493
+      internalID: 938663522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dejavu10x10_gs_tc_NoBackground_150
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 0
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6b6a2907ba4f4d468184fb2c51c2b78
+      internalID: 1912344572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dejavu10x10_gs_tc_NoBackground_151
+      rect:
+        serializedVersion: 2
+        x: 310
+        y: 0
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2243c3935eb5a3e43acd15708c0d395d
+      internalID: -877366536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -3120,7 +3372,19 @@ TextureImporter:
       dejavu10x10_gs_tc_NoBackground_138: 814542196
       dejavu10x10_gs_tc_NoBackground_139: -1037255901
       dejavu10x10_gs_tc_NoBackground_14: -1738749236
+      dejavu10x10_gs_tc_NoBackground_140: 1262068011
+      dejavu10x10_gs_tc_NoBackground_141: 1076854347
+      dejavu10x10_gs_tc_NoBackground_142: -510677994
+      dejavu10x10_gs_tc_NoBackground_143: -1756503635
+      dejavu10x10_gs_tc_NoBackground_144: 2120130544
+      dejavu10x10_gs_tc_NoBackground_145: 2075781070
+      dejavu10x10_gs_tc_NoBackground_146: -1373448209
+      dejavu10x10_gs_tc_NoBackground_147: 1676706451
+      dejavu10x10_gs_tc_NoBackground_148: 40344616
+      dejavu10x10_gs_tc_NoBackground_149: 938663522
       dejavu10x10_gs_tc_NoBackground_15: 870507484
+      dejavu10x10_gs_tc_NoBackground_150: 1912344572
+      dejavu10x10_gs_tc_NoBackground_151: -877366536
       dejavu10x10_gs_tc_NoBackground_16: 673860995
       dejavu10x10_gs_tc_NoBackground_17: 108462139
       dejavu10x10_gs_tc_NoBackground_18: -31237623
