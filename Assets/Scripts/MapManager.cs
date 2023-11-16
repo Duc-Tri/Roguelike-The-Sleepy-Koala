@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -5,16 +7,36 @@ public class MapManager : MonoBehaviour
 {
     public static MapManager instance;
 
-    [SerializeField] private int width = 80, height = 45;
+    [Header("Map Settings")]
 
-    [SerializeField] private Color32 darkColor = new Color32(0, 0, 0, 0), lightColor = new Color32(255, 255, 255, 255);
+    [SerializeField] private int width = 80;
+    [SerializeField] private int height = 45;
+    [SerializeField] private int roomMaxSize = 10;
+    [SerializeField] private int roomMinSize = 6;
+    [SerializeField] private int maxRooms = 30;
 
-    [SerializeField] private TileBase floorTile, wallTile;
+    [Header("Colors")]
+    [SerializeField] private Color32 darkColor = new Color32(0, 0, 0, 0);
+    [SerializeField] private Color32 lightColor = new Color32(255, 255, 255, 255);
 
-    [SerializeField] private Tilemap floorMap, obstacleMap;
+    [Header("Tiles")]
+    [SerializeField] private TileBase floorTile;
+    [SerializeField] private TileBase wallTile;
+
+    [Header("Tilemaps")]
+    [SerializeField] private Tilemap floorMap;
+    [SerializeField] private Tilemap obstacleMap;
+
+    [Header("Features")]
+    [SerializeField] private List<RectangularRoom> rooms = new List<RectangularRoom>();
+
+
+    public TileBase FloorTile { get => floorTile; }
+    public TileBase WallTile { get => wallTile; }
 
     public Tilemap FloorMap { get => floorMap; }
     public Tilemap ObstacleMap { get => obstacleMap; }
+    public List<RectangularRoom> Rooms { get => rooms; }
 
     private void Awake()
     {
@@ -26,25 +48,21 @@ public class MapManager : MonoBehaviour
 
     void Start()
     {
-        Vector3Int centerTile = new Vector3Int(width / 2, height / 2, 0);
-        BoundsInt wallBounds = new BoundsInt(new Vector3Int(29, 28, 0), new Vector3Int(3, 1, 0));
-        for (int x = 0; x < wallBounds.size.x; x++)
-        {
-            for (int y = 0; y < wallBounds.size.y; y++)
-            {
-                Vector3Int wallPosition = new Vector3Int(wallBounds.min.x + x, wallBounds.min.y + y, 0);
-                obstacleMap.SetTile(wallPosition, wallTile);
-            }
-        }
+        ProcGen procGen = new ProcGen();
+        procGen.GenerateDungeon(width, height, roomMaxSize, roomMinSize, maxRooms, rooms);
 
-        Instantiate(Resources.Load<GameObject>("Player"), new Vector3(40 + 0.5f, 25 + 0.5f, 0), Quaternion.identity).name = "Player";
         Instantiate(Resources.Load<GameObject>("NPC"), new Vector3(40 - 5.5f, 25 + 0.5f, 0), Quaternion.identity).name = "NPC";
 
         Camera.main.transform.position = new Vector3(40, 20.25f, -10);
-        Camera.main.orthographicSize = 14;// 27;
+        Camera.main.orthographicSize = 20;// 27;
     }
 
     public bool InBounds(int x, int y) =>
         0 <= x && x < width &&
         0 <= y && y <= height;
+
+    internal void CreatePlayer(Vector2Int pos)
+    {
+        Instantiate(Resources.Load<GameObject>("Player"), new Vector3(pos.x + 0.5f, pos.y + 0.5f, 0), Quaternion.identity).name = "JOUEUR";
+    }
 }

@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8419856192411337003}
   - component: {fileID: 2055617736662341293}
-  - component: {fileID: 401870242294232859}
   - component: {fileID: 700128705702986236}
   m_Layer: 0
   m_Name: NPC
@@ -86,19 +85,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &401870242294232859
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7928105558918514797}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 129a21b3a5a69644c9debc82716ab3b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveKeyHeld: 0
 --- !u!114 &700128705702986236
 MonoBehaviour:
   m_ObjectHideFlags: 0
