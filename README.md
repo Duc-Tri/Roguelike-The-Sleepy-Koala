@@ -1,34 +1,33 @@
-# ROGUELIKE TUTORIAL
-## Roguelike - The Sleepy Koala
+# ROGUELIKE TUTORIAL (The Sleepy Koala)
 
 https://www.youtube.com/watch?v=_24TfxaPWlI&list=PLzbRW-gm6o9ZxxDcx2u2Oj-Vap4HHQdwz
 
-P00 - Setting Up	0:03:29
+0:03:29	P00 - Setting Up
 
-P01 - Instantiating the '@' symbol and moving it around	0:06:48
+0:06:48	P01 - Instantiating the '@' symbol and moving it around
 
-P02 - The generic Entity, the corrections%2C and the map	0:09:36
+0:09:36	P02 - The generic Entity, the corrections%2C and the map
 
-P03 - Generating a Dungeon	0:07:51
+0:07:51	P03 - Generating a Dungeon
 
-P04 - Field of View	0:08:08
+0:08:08	P04 - Field of View
 
-P05 - Placing enemies and kicking them (harmlessly)	0:05:46
+0:05:46	P05 - Placing enemies and kicking them (harmlessly)
 
-P06 - Doing (and Taking) Some Damage	0:11:55
+0:11:55	P06 - Doing (and Taking) Some Damage
 
-P07 - Creating the Interface (UI)	0:10:40
+0:10:40	P07 - Creating the Interface (UI)
 
-P08 - Items and Inventory	0:15:23
+0:15:23	P08 - Items and Inventory
 
-P09 - Ranged Scrolls and Targeting	0:17:16
+0:17:16	P09 - Ranged Scrolls and Targeting
 
-P10 - Saving and Loading	0:29:06
+0:29:06	P10 - Saving and Loading
 
-P11 - Delving into the Dungeon	0:22:46
+0:22:46	P11 - Delving into the Dungeon
 
-P12 - Increasing Difficulty	0:05:31
+0:05:31	P12 - Increasing Difficulty
 
-P13 - Gearing Up	0:12:04
+0:12:04	P13 - Gearing Up
 
-Extras - Multi Tiled Entities	0:14:17
+0:14:17	Extras - Multi Tiled Entities
