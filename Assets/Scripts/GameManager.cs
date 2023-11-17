@@ -70,4 +70,8 @@ public class GameManager : MonoBehaviour
         return null;
     }
 
+    internal Actor GetBlockingActorAtLocation(Vector3 vector3)
+    {
+        throw new System.NotImplementedException();
+    }
 }

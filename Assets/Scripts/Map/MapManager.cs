@@ -31,6 +31,8 @@ public class MapManager : MonoBehaviour
     [SerializeField] private List<Vector3Int> visibleTiles = new List<Vector3Int>();
     [SerializeField] private Dictionary<Vector3Int, TileData> tiles = new Dictionary<Vector3Int, TileData>();
 
+    internal Dictionary<Vector2Int, Node> Nodes;
+
     public TileBase FloorTile { get => floorTile; }
     public TileBase WallTile { get => wallTile; }
     public TileBase FogTile { get => fogTile; }
@@ -38,8 +40,6 @@ public class MapManager : MonoBehaviour
     public Tilemap FloorMap { get => floorMap; }
     public Tilemap ObstacleMap { get => obstacleMap; }
     public Tilemap FogMap { get => fogMap; }
-
-
 
     public List<RectangularRoom> Rooms { get => rooms; }
 
@@ -54,7 +54,7 @@ public class MapManager : MonoBehaviour
     void Start()
     {
         ProcGen procGen = new ProcGen();
-        procGen.GenerateDungeon(width, height, roomMaxSize, roomMinSize, maxRooms,  maxMonstersPerRoom, rooms);
+        procGen.GenerateDungeon(width, height, roomMaxSize, roomMinSize, maxRooms, maxMonstersPerRoom, rooms);
 
         AddTileMapToDictionary(floorMap);
         AddTileMapToDictionary(obstacleMap);
