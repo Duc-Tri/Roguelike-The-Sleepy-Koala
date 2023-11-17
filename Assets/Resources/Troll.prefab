@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2055617736662341293}
   - component: {fileID: 700128705702986236}
   m_Layer: 0
-  m_Name: NPC
+  m_Name: Troll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,8 +74,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 319591637, guid: 4190a131a1cec96409f446f0ef984896, type: 3}
-  m_Color: {r: 1, g: 1, b: 0, a: 1}
+  m_Sprite: {fileID: -576901580, guid: 4190a131a1cec96409f446f0ef984896, type: 3}
+  m_Color: {r: 0, g: 0.49803922, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

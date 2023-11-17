@@ -5,6 +5,7 @@ using UnityEngine;
 public class Entity : MonoBehaviour
 {
     [SerializeField] private bool isSentient = false;
+    [SerializeField] private bool blocksMovement = false;
 
     [SerializeField] private int fieldOfViewRange = 8;
     [SerializeField] private List<Vector3Int> fieldOfView;
@@ -12,6 +13,7 @@ public class Entity : MonoBehaviour
     AdamMilVisibility algorithm;
 
     public bool IsSentient { get => isSentient; }
+    public bool BlocksMovement { get => blocksMovement; }
 
     void Start()
     {
@@ -43,7 +45,7 @@ public class Entity : MonoBehaviour
     }
 
     public void Move(Vector2 direction)
-    {
+    { 
         transform.position += (Vector3)direction;
     }
 

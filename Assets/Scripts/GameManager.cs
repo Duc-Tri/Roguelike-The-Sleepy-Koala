@@ -58,4 +58,16 @@ public class GameManager : MonoBehaviour
     {
         entities.Add(entity);
     }
+
+    public Entity GetBlockingEntityAtLocation(Vector3 location)
+    {
+        foreach (Entity entity in entities)
+        {
+            if (entity.BlocksMovement && entity.transform.position == location)
+                return entity;
+        }
+
+        return null;
+    }
+
 }
