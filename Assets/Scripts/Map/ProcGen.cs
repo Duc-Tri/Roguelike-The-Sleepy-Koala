@@ -41,11 +41,13 @@ public sealed class ProcGen
                 }
             }
 
-            if (rooms.Count > 0)
+            if (rooms.Count != 0)
             {
                 // dig out a tunnel between this room and the previous one
                 TunnelBetWeen(oldRoom, newRoom);
             }
+
+            PlaceEntities(newRoom, maxMonstersPerRoom);
 
             rooms.Add(newRoom);
             oldRoom = newRoom;

@@ -62,7 +62,7 @@ public class MapManager : MonoBehaviour
         SetupFogMap();
 
         Camera.main.transform.position = new Vector3(40, 20.25f, -10);
-        Camera.main.orthographicSize = 27; // 27;
+        //Camera.main.orthographicSize = 22; // 27;
     }
 
     public bool InBounds(int x, int y) =>

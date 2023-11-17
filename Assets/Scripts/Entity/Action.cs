@@ -46,7 +46,7 @@ static public class Action
         }
         else
         {
-            Debug.Log($"The {entity.name} skips its turn.");
+            //Debug.Log($"The {entity.name} skips its turn.");
         }
 
         GameManager.instance.EndTurn();

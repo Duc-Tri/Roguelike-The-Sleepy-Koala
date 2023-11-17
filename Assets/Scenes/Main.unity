@@ -225,7 +225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a42523fdd031934fb2b9e49f81da05d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 0.05
+  time: 0.01
   isPlayerTurn: 1
   entityNum: 0
   entities: []
@@ -305,7 +305,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 22
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
