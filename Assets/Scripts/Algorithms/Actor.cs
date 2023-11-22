@@ -1,5 +1,50 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
-internal class Actor : MonoBehaviour
+public class Actor : Entity
 {
+    [SerializeField] private bool isAlive = true;
+
+    [SerializeField] private int fieldOfViewRange = 8;
+    [SerializeField] private List<Vector3Int> fieldOfView;
+
+    [SerializeField] private AI aI;
+
+    AdamMilVisibility algorithm;
+
+    public bool IsAlive { get => isAlive; set => isAlive = value; }
+    public List<Vector3Int> FieldOfView { get => fieldOfView; set => fieldOfView = value; }
+
+    private void OnValidate()
+    {
+        if (GetComponent<AI>())
+            aI = GetComponent<AI>();
+    }
+
+    void Start()
+    {
+        AddToGameMAnager();
+        if (GetComponent<Player>())
+            GameManager.instance.InsertActor(this, 0);
+        else if (IsAlive)
+            GameManager.instance.AddActor(this);
+
+        algorithm = new AdamMilVisibility();
+        UpdateFieldOfView();
+    }
+
+    public void UpdateFieldOfView()
+    {
+        Vector3Int gridpos = MapManager.instance.FloorMap.WorldToCell(transform.position);
+
+        fieldOfView.Clear();
+        algorithm.Compute(gridpos, fieldOfViewRange, fieldOfView);
+
+        if (GetComponent<Player>())
+        {
+            MapManager.instance.UpdateFogMap(fieldOfView);
+            MapManager.instance.SetEntitiesVisibilities();
+        }
+    }
+
 }

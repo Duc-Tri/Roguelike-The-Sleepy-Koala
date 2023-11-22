@@ -8,47 +8,56 @@ static public class Action
         Debug.Log("Quit");
     }
 
-    static public bool BumpAction(Entity entity, Vector2 direction)
+    static public bool BumpAction(Actor actor, Vector2 direction)
     {
-        Entity target = GameManager.instance.GetBlockingEntityAtLocation(entity.transform.position + (Vector3)direction);
+        Entity target = GameManager.instance.GetBlockingActorAtLocation(actor.transform.position + (Vector3)direction);
 
         if (target)
         {
-            MeleeAction(target);
+            MeleeAction(actor, target);
             return false;
         }
         else
         {
-            MovementAction(entity, direction);
+            MovementAction(actor, direction);
             return true;
         }
     }
 
-    private static void MeleeAction(Entity target)
+    static public void MeleeAction(Actor actor, Entity target)
     {
-        Debug.Log($"You kick the {target.name}, much to its annoyance !");
-        GameManager.instance.EndTurn();
-    }
+        int damage = actor.GetComponent<Fighter>().Power - target.GetComponent<Fighter>().Defense;
+        string attackDesc = $"{actor.name} attacks {target.name}";
+        string colorHex = "";
 
-    static public void MovementAction(Entity entity, Vector2 direction)
-    {
-        Debug.Log($"{entity.name} => {direction}");
-        entity.Move(direction);
-        entity.UpdateFieldOfView();
-        GameManager.instance.EndTurn();
-    }
+        if (actor.GetComponent<Player>())
+            colorHex = "#ffffff";
+        else
+            colorHex = "#d1a3a4";
 
-    static public void SkipAction(Entity entity)
-    {
-        if (entity.GetComponent<Player>())
+        if (damage > 0)
         {
-            Debug.Log("You decided to skip your turn.");
+            Debug.Log($"{attackDesc} for {damage} hit points.");
+            target.GetComponent<Fighter>().Hp -= damage;
         }
         else
         {
-            //Debug.Log($"The {entity.name} skips its turn.");
+            Debug.Log($"{attackDesc} but does no damge.");
         }
 
+        GameManager.instance.EndTurn();
+    }
+
+    static public void MovementAction(Actor actor, Vector2 direction)
+    {
+        //Debug.Log($"{actor.name} => {direction}");
+        actor.Move(direction);
+        actor.UpdateFieldOfView();
+        GameManager.instance.EndTurn();
+    }
+
+    static public void SkipAction()
+    {
         GameManager.instance.EndTurn();
     }
 }

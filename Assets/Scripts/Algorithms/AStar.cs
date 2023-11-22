@@ -135,14 +135,14 @@ public class AStar : MonoBehaviour
     /// <summary> Gets the node </summary>
     private Node GetNode(Vector2Int position)
     {
-        if (MapManager.instance.Nodes.ContainsKey(position))
+        if (MapManager.instance.nodes.ContainsKey(position))
         {
-            return MapManager.instance.Nodes[position];
+            return MapManager.instance.nodes[position];
         }
         else
         {
             Node node = new Node(position);
-            MapManager.instance.Nodes.Add(position, node);
+            MapManager.instance.nodes.Add(position, node);
             return node;
         }
     }
