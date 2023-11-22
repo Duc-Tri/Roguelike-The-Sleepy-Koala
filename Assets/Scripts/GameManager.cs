@@ -38,26 +38,21 @@ public class GameManager : MonoBehaviour
 
     private void StartTurn()
     {
-        if (entities[actorNum].GetComponent<Player>())
+        if (actors[actorNum].GetComponent<Player>())
             isPlayerTurn = true;
         else
         {
             if (actors[actorNum].GetComponent<HostileEnemy>())
-            {
                 actors[actorNum].GetComponent<HostileEnemy>().RunAI();
-            }
             else
-            {
-                Action.SkipAction();
-            }
+                Action.SkipAction(); // ?
         }
     }
 
     public void EndTurn()
     {
-        //Debug.Log($"EndTurn ■■ actorNum={actorNum} / {actors.Count}");
-        if (actors[actorNum].GetComponent<Player>())
-            isPlayerTurn = false;
+        //if (actors[actorNum].GetComponent<Player>())
+        if (isPlayerTurn) isPlayerTurn = false;
 
         if (actorNum >= actors.Count - 1)
             actorNum = 0;

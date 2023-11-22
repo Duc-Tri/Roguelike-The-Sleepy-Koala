@@ -13,7 +13,6 @@ public class Entity : MonoBehaviour
         GameManager.instance.Entitites.Add(this);
     }
 
-
     public void Move(Vector2 direction)
     {
         transform.position += (Vector3)direction;
