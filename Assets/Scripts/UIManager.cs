@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,6 +14,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private int sameMessageCount = 0; // read only
     [SerializeField] private string lastMessage; // read only
     [SerializeField] private bool isMessageHistoryOpen = false; // read only
+
     [SerializeField] private GameObject messageHistory;
     [SerializeField] private GameObject messageHistoryContent;
     [SerializeField] private GameObject last5MessagesContent;
@@ -42,14 +40,13 @@ public class UIManager : MonoBehaviour
         hpSlider.maxValue = maxHp;
     }
 
-
     public void SetHealth(int hp, int maxHp)
     {
         hpSlider.value = hp;
         hpSliderText.text = $"HP: {hp}/{maxHp}";
     }
 
-    public void OnConnectedToServer()
+    public void ToggleMessageHistory()
     {
         messageHistory.SetActive(!messageHistory.activeSelf);
         isMessageHistoryOpen = messageHistory.activeSelf;
@@ -83,8 +80,8 @@ public class UIManager : MonoBehaviour
             if (messageHistoryContent.transform.childCount - 1 < i)
                 return;
 
-            TextMeshProUGUI messageHistoryLastChild = messageHistoryContent.transform.GetChild(messageHistoryContent.transform.childCount - 1).GetComponent<TextMeshProUGUI>();
-            TextMeshProUGUI last5HistoryLastChild = last5MessagesContent.transform.GetChild(last5MessagesContent.transform.childCount - 1).GetComponent<TextMeshProUGUI>();
+            TextMeshProUGUI messageHistoryLastChild = messageHistoryContent.transform.GetChild(messageHistoryContent.transform.childCount - 1 - i).GetComponent<TextMeshProUGUI>();
+            TextMeshProUGUI last5HistoryLastChild = last5MessagesContent.transform.GetChild(last5MessagesContent.transform.childCount - 1 - i).GetComponent<TextMeshProUGUI>();
 
             last5HistoryLastChild.text = messageHistoryLastChild.text;
             last5HistoryLastChild.color = messageHistoryLastChild.color;

@@ -28,15 +28,25 @@ static public class Action
     {
         int damage = actor.GetComponent<Fighter>().Power - target.GetComponent<Fighter>().Defense;
         string attackDesc = $"{actor.name} attacks {target.name}";
+        string colorHex = "";
+
+        if (actor.GetComponent<Player>())
+        {
+            colorHex = "#ffffff";
+        }
+        else
+        {
+            colorHex = "#d1a3a4";
+        }
 
         if (damage > 0)
         {
-            Debug.Log($"{attackDesc} for {damage} hit points.");
+            UIManager.instance.AddMessage($"{attackDesc} for {damage} hit points.", colorHex);
             target.GetComponent<Fighter>().Hp -= damage;
         }
         else
         {
-            Debug.Log($"{attackDesc} but does no damge.");
+            UIManager.instance.AddMessage($"{attackDesc} but does no damge.", colorHex);
         }
 
         GameManager.instance.EndTurn();

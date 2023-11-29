@@ -13,6 +13,12 @@ sealed class Fighter : MonoBehaviour
         set
         {
             hp = Mathf.Max(0, Mathf.Min(value, maxHp));
+
+            if (GetComponent<Player>())
+            {
+                UIManager.instance.SetHealth(hp, maxHp);
+            }
+
             if (hp == 0)
                 Die();
         }
@@ -24,15 +30,24 @@ sealed class Fighter : MonoBehaviour
 
     public Actor Target { get => target; set => target = value; }
 
+    private void Start()
+    {
+        if (GetComponent<Player>())
+        {
+            UIManager.instance.SetHealthMax(maxHp);
+            UIManager.instance.SetHealth(hp, maxHp);
+        }
+    }
+
     private void Die()
     {
         if (GetComponent<Player>())
         {
-            Debug.Log($"You died");
+            UIManager.instance.AddMessage($"You died", "#ff0000");
         }
         else
         {
-            Debug.Log($"{name} is dead");
+            UIManager.instance.AddMessage($"{name} is dead", "#ffa500");
         }
 
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();

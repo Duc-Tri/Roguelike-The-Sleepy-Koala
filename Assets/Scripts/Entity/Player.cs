@@ -22,8 +22,11 @@ public class Player : MonoBehaviour, Controls.IPlayerActions
 
     private void FixedUpdate()
     {
-        if (GameManager.instance.IsPlayerTurn && moveKeyHeld && GetComponent<Actor>().IsAlive)
-            MovePlayer();
+        if (!UIManager.instance.IsMessageHistoryOpen)
+        {
+            if (GameManager.instance.IsPlayerTurn && moveKeyHeld && GetComponent<Actor>().IsAlive)
+                MovePlayer();
+        }
     }
 
     private void MovePlayer()
@@ -59,4 +62,11 @@ public class Player : MonoBehaviour, Controls.IPlayerActions
         if (context.performed)
             Action.EscapeAction();
     }
+
+    public void OnView(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            UIManager.instance.ToggleMessageHistory();
+    }
+
 }
