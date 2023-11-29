@@ -89,7 +89,6 @@ public class UIManager : MonoBehaviour
             last5HistoryLastChild.text = messageHistoryLastChild.text;
             last5HistoryLastChild.color = messageHistoryLastChild.color;
         }
-
     }
 
     private Color GetColorFromHex(string colorHex)
@@ -101,4 +100,5 @@ public class UIManager : MonoBehaviour
         Debug.Log("GetColorFromHex: could not parse color");
         return Color.white;
     }
+
 }
