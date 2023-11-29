@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<Entity> entities = new List<Entity>();
     [SerializeField] private List<Actor> actors = new List<Actor>();
 
-    [Header("Entities")]
+    [Header("Death")]
 
     [SerializeField] private Sprite deadSprite;
 
@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
 
     public List<Entity> Entitites { get => entities; }
     public List<Actor> Actors { get => actors; }
+
     public Sprite DeadSprite { get => deadSprite; }
 
     void Awake()

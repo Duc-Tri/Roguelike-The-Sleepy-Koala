@@ -34,10 +34,11 @@ public class MapManager : MonoBehaviour
 
     internal Dictionary<Vector2Int, Node> nodes = new Dictionary<Vector2Int, Node>();
 
+    public int Width { get => width; }
+    public int Height { get => height; }
     public TileBase FloorTile { get => floorTile; }
     public TileBase WallTile { get => wallTile; }
     public TileBase FogTile { get => fogTile; }
-
     public Tilemap FloorMap { get => floorMap; }
     public Tilemap ObstacleMap { get => obstacleMap; }
     public Tilemap FogMap { get => fogMap; }
@@ -47,6 +48,7 @@ public class MapManager : MonoBehaviour
 
     private void Awake()
     {
+
         if (instance == null)
             instance = this;
         else

@@ -28,12 +28,6 @@ static public class Action
     {
         int damage = actor.GetComponent<Fighter>().Power - target.GetComponent<Fighter>().Defense;
         string attackDesc = $"{actor.name} attacks {target.name}";
-        string colorHex = "";
-
-        if (actor.GetComponent<Player>())
-            colorHex = "#ffffff";
-        else
-            colorHex = "#d1a3a4";
 
         if (damage > 0)
         {

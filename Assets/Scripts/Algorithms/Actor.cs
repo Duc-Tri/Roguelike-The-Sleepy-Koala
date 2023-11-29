@@ -6,6 +6,7 @@ public class Actor : Entity
     [SerializeField] private bool isAlive = true;
 
     [SerializeField] private int fieldOfViewRange = 8;
+
     [SerializeField] private List<Vector3Int> fieldOfView;
 
     [SerializeField] private AI aI;
