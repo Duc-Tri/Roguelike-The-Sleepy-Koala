@@ -65,5 +65,15 @@ sealed class Fighter : MonoBehaviour
         }
     }
 
+    // Return the amount of HP recovered
+    public int Heal(int amount)
+    {
+        int newHPValue = Math.Min(maxHp, hp + amount);
+        int amountRecovered = newHPValue - hp;
+
+        Hp = newHPValue;
+
+        return amountRecovered;
+    }
 
 }

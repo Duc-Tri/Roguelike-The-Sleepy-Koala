@@ -11,15 +11,21 @@ public class Actor : Entity
 
     [SerializeField] private AI aI;
 
+    [SerializeField] private Inventory inventory;
+
     AdamMilVisibility algorithm;
 
     public bool IsAlive { get => isAlive; set => isAlive = value; }
     public List<Vector3Int> FieldOfView { get => fieldOfView; set => fieldOfView = value; }
+    public Inventory Inventory { get => inventory; }
 
     private void OnValidate()
     {
         if (GetComponent<AI>())
             aI = GetComponent<AI>();
+
+        if (GetComponent<Inventory>())
+            inventory = GetComponent<Inventory>();
     }
 
     void Start()

@@ -1,10 +1,14 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
+
+    [SerializeField] private EventSystem eventSystem;
+    [SerializeField] private bool isMenuOpen = false; // read only
 
     [Header("Health UI")]
     [SerializeField] private Slider hpSlider;
@@ -19,7 +23,20 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject messageHistoryContent;
     [SerializeField] private GameObject last5MessagesContent;
 
+    [Header("Inventory UI")]
+    [SerializeField] private bool isInventoryOpen = false; // read only
+    [SerializeField] private GameObject inventory;
+    [SerializeField] private GameObject inventoryContent;
+
+    [Header("Drop Menu UI")]
+    [SerializeField] private bool isDropMenuOpen = false; // read only
+    [SerializeField] private GameObject dropMenu;
+    [SerializeField] private GameObject dropMenuContent;
+
+    public bool IsMenuOpen { get => isMenuOpen; }
     public bool IsMessageHistoryOpen { get => isMessageHistoryOpen; }
+    public bool IsInventoryOpen { get => isInventoryOpen; }
+    public bool IsDropMenuOpen { get => IsDropMenuOpen; }
 
     private void Awake()
     {
@@ -50,6 +67,36 @@ public class UIManager : MonoBehaviour
     {
         messageHistory.SetActive(!messageHistory.activeSelf);
         isMessageHistoryOpen = messageHistory.activeSelf;
+    }
+
+    public void ToggleInventory(Actor actor = null)
+    {
+        inventory.SetActive(!inventory.activeSelf);
+        isMenuOpen = isInventoryOpen = inventory.activeSelf;
+
+        if (isMenuOpen) UpdateMenu(actor, inventoryContent);
+    }
+
+    public void ToggleDropMenu(Actor actor = null)
+    {
+        dropMenu.SetActive(!dropMenu.activeSelf);
+        isMenuOpen = isDropMenuOpen = dropMenu.activeSelf;
+
+        if (isMenuOpen) UpdateMenu(actor, inventoryContent);
+    }
+
+    public void ToggleMenu()
+    {
+        if (IsMenuOpen)
+        {
+            isMenuOpen = !isMenuOpen;
+
+            if (isMessageHistoryOpen) ToggleMessageHistory();
+
+            if (isInventoryOpen) ToggleInventory();
+
+            if (isDropMenuOpen) ToggleDropMenu();
+        }
     }
 
     public void AddMessage(string newMessage, string colorHex)
@@ -96,6 +143,36 @@ public class UIManager : MonoBehaviour
 
         Debug.Log("GetColorFromHex: could not parse color");
         return Color.white;
+    }
+
+    private void UpdateMenu(Actor actor, GameObject menuContent)
+    {
+        for (int i = 0; i < menuContent.transform.childCount; i++)
+        {
+            GameObject menuContentChild = menuContent.transform.GetChild(i).gameObject;
+            menuContentChild.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "";
+            menuContentChild.GetComponent<Button>().onClick.RemoveAllListeners();
+            menuContentChild.SetActive(false);
+        }
+
+        char c = 'a';
+        for (int i = 0; i < actor.Inventory.Items.Count; i++)
+        {
+            GameObject menuContentChild = menuContent.transform.GetChild(i).gameObject;
+            menuContentChild.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = $"({c++}) {actor.Inventory.Items[i].name}";
+            menuContentChild.GetComponent<Button>().onClick.AddListener(() =>
+            {
+                if (menuContent == inventoryContent)
+                    Action.UseAction(actor, i - 1);
+                else if (menuContent == dropMenuContent)
+                    Action.DropAction(actor, actor.Inventory.Items[i - 1]);
+
+                UpdateMenu(actor, menuContent);
+            });
+            menuContentChild.SetActive(true);
+        }
+
+        eventSystem.SetSelectedGameObject(menuContent.transform.GetChild(0).gameObject);
     }
 
 }

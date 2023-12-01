@@ -10,7 +10,7 @@ public class Entity : MonoBehaviour
 
     public void AddToGameMAnager()
     {
-        GameManager.instance.Entitites.Add(this);
+        GameManager.instance.AddEntity(this);
     }
 
     public void Move(Vector2 direction)

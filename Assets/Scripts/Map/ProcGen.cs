@@ -5,7 +5,7 @@ using UnityEngine;
 
 public sealed class ProcGen
 {
-    public void GenerateDungeon(int mapWidth, int mapHeight, int roomMinSize, int roomMaxSize, int maxRooms, int maxMonstersPerRoom, List<RectangularRoom> rooms)
+    public void GenerateDungeon(int mapWidth, int mapHeight, int roomMinSize, int roomMaxSize, int maxRooms, int maxMonstersPerRoom, int maxItemsPerRoom, List<RectangularRoom> rooms)
     {
         RectangularRoom newRoom, oldRoom = null;
 
@@ -47,7 +47,7 @@ public sealed class ProcGen
                 TunnelBetWeen(oldRoom, newRoom);
             }
 
-            PlaceActors(newRoom, maxMonstersPerRoom);
+            PlaceEntities(newRoom, maxMonstersPerRoom, maxItemsPerRoom);
 
             rooms.Add(newRoom);
             oldRoom = newRoom;
@@ -124,9 +124,10 @@ public sealed class ProcGen
 
     }
 
-    private void PlaceActors(RectangularRoom newRoom, int maxMonsters)
+    private void PlaceEntities(RectangularRoom newRoom, int maxMonsters, int maxItemsPerRoom)
     {
         int numMonsters = Random.Range(0, maxMonsters + 1);
+        int numItems = Random.Range(0, maxItemsPerRoom + 1);
 
         for (int monster = 0; monster < numMonsters;)
         {
@@ -157,6 +158,31 @@ public sealed class ProcGen
             }
 
             monster++;
+        }
+
+
+        for (int item = 0; item < numItems;)
+        {
+            int x = Random.Range(newRoom.X, newRoom.X + newRoom.Width);
+            int y = Random.Range(newRoom.Y, newRoom.Y + newRoom.Height);
+
+            if (x == newRoom.X || x == newRoom.X + newRoom.Width - 1 || y == newRoom.Y || y == newRoom.Y + newRoom.Height - 1)
+            {
+                continue; // retry
+            }
+
+            for (int entity = 0; entity < GameManager.instance.Entitites.Count; entity++)
+            {
+                Vector3Int pos = MapManager.instance.FloorMap.WorldToCell(GameManager.instance.Entitites[entity].transform.position);
+                if (pos.x == x && pos.y == y)
+                {
+                    return;
+                }
+            }
+
+            MapManager.instance.CreateEntity("Potion of Health", new Vector2Int(x, y));
+
+            item++;
         }
 
     }
