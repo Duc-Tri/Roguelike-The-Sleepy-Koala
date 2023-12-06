@@ -35,6 +35,7 @@ public class MapManager : MonoBehaviour
 
 
     internal Dictionary<Vector2Int, Node> nodes = new Dictionary<Vector2Int, Node>();
+    private int numEntities = 0;
 
     public int Width { get => width; }
     public int Height { get => height; }
@@ -50,7 +51,6 @@ public class MapManager : MonoBehaviour
 
     private void Awake()
     {
-
         if (instance == null)
             instance = this;
         else
@@ -77,7 +77,7 @@ public class MapManager : MonoBehaviour
 
     internal void CreateEntity(string name, Vector2Int pos)
     {
-        Instantiate(Resources.Load<GameObject>(name), new Vector3(pos.x + 0.5f, pos.y + 0.5f, 0), Quaternion.identity).name = name.ToUpper();
+        Instantiate(Resources.Load<GameObject>(name), new Vector3(pos.x + 0.5f, pos.y + 0.5f, 0), Quaternion.identity).name = name.ToUpper() + numEntities++;
 
         Debug.Log($"CreateEntity {name} at {pos}.");
     }
@@ -140,6 +140,16 @@ public class MapManager : MonoBehaviour
             fogMap.SetTile(pos, fogTile);
             fogMap.SetTileFlags(pos, TileFlags.None);
         }
+    }
+
+    public bool IsValidPosition(Vector3 futurePosition)
+    {
+        Vector3Int gridPosition = floorMap.WorldToCell(futurePosition);
+
+        if (!InBounds(gridPosition.x, gridPosition.y) || obstacleMap.HasTile(gridPosition))
+            return false;
+
+        return true;
     }
 
 }

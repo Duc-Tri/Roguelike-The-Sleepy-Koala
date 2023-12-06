@@ -15,7 +15,8 @@ public class Entity : MonoBehaviour
 
     public void Move(Vector2 direction)
     {
-        transform.position += (Vector3)direction;
+        if (MapManager.instance.IsValidPosition(transform.position + (Vector3)direction))
+            transform.position += (Vector3)direction;
     }
 
 }

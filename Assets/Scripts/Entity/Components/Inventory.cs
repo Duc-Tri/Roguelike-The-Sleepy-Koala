@@ -6,9 +6,11 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     [SerializeField] private int capacity = 0;
+    [SerializeField] private Consumable selectedConsumable = null;
     [SerializeField] private List<Item> items = new List<Item>();
 
     public int Capacity { get => capacity; }
+    public Consumable SelectedConsumable { get; set; }
     public List<Item> Items { get => items; }
 
     public void Drop(Item item)

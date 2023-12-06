@@ -16,8 +16,10 @@ public class Actor : Entity
     AdamMilVisibility algorithm;
 
     public bool IsAlive { get => isAlive; set => isAlive = value; }
-    public List<Vector3Int> FieldOfView { get => fieldOfView; set => fieldOfView = value; }
+    public List<Vector3Int> FieldOfView => fieldOfView;
     public Inventory Inventory { get => inventory; }
+
+    public AI AI { get => aI; set => AI = value; }
 
     private void OnValidate()
     {

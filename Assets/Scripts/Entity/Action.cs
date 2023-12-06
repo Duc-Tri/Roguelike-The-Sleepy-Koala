@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 static public class Action
@@ -34,19 +35,17 @@ static public class Action
         GameManager.instance.EndTurn();
     }
 
-    static public void UseAction(Actor actor, int index)
+    static public void UseAction(Actor consumer, Item item)
     {
-        Item item = actor.Inventory.Items[index];
         bool itemUsed = false;
 
         if (item.GetComponent<Consumable>())
-            itemUsed = item.GetComponent<Consumable>().Activate(actor, item);
-
-        if (!itemUsed)
-            return;
+            itemUsed = item.GetComponent<Consumable>().Activate(consumer);
 
         UIManager.instance.ToggleInventory();
-        GameManager.instance.EndTurn();
+
+        if (itemUsed)
+            GameManager.instance.EndTurn();
     }
 
 
@@ -57,7 +56,7 @@ static public class Action
 
     static public bool BumpAction(Actor actor, Vector2 direction)
     {
-        Entity target = GameManager.instance.GetBlockingActorAtLocation(actor.transform.position + (Vector3)direction);
+        Entity target = GameManager.instance.GetActorAtLocation(actor.transform.position + (Vector3)direction);
 
         if (target)
         {
@@ -107,8 +106,22 @@ static public class Action
         GameManager.instance.EndTurn();
     }
 
-    static public void SkipAction()
+    static public void WaitAction()
     {
         GameManager.instance.EndTurn();
+    }
+
+    static public void CastAction(Actor consumer, Actor target, Consumable consumable)
+    {
+        bool castSuccess = consumable.Cast(consumer, target);
+        if (castSuccess)
+            GameManager.instance.EndTurn();
+    }
+
+    static public void CastAction(Actor consumer, List<Actor> targets, Consumable consumable)
+    {
+        bool castSuccess = consumable.Cast(consumer, targets);
+        if (castSuccess)
+            GameManager.instance.EndTurn();
     }
 }

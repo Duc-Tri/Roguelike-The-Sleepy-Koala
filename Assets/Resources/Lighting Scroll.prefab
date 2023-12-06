@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 8713625579724481989}
   - component: {fileID: 8200972892957409158}
   - component: {fileID: 5875751127532751229}
-  - component: {fileID: 9014596515903219477}
+  - component: {fileID: 4544467001940550484}
   m_Layer: 0
-  m_Name: Potion of Health
+  m_Name: Lighting Scroll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,8 +75,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1795955873, guid: 4190a131a1cec96409f446f0ef984896, type: 3}
-  m_Color: {r: 0.6792453, g: 0.16340333, b: 0.5929313, a: 1}
+  m_Sprite: {fileID: 212016789, guid: 4190a131a1cec96409f446f0ef984896, type: 3}
+  m_Color: {r: 0.8207547, g: 0.76245296, b: 0.12001601, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -99,8 +99,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blocksMovement: 0
-  consumable: {fileID: 9014596515903219477}
---- !u!114 &9014596515903219477
+  consumable: {fileID: 4544467001940550484}
+--- !u!114 &4544467001940550484
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -109,7 +109,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 8329823493149154852}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13455e33683b7c245b91986d086825fc, type: 3}
+  m_Script: {fileID: 11500000, guid: c411e9729e359b74daf88ffdedebd2b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amount: 4
+  damage: 20
+  maxiumRange: 5

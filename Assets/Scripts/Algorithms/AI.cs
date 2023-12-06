@@ -8,6 +8,11 @@ public class AI : MonoBehaviour
 
     private void OnValidate() => aStar = GetComponent<AStar>();
 
+    public virtual void RunAI()
+    {
+
+    }
+
     public void MoveAlongPath(Vector3Int targetPos)
     {
         Vector3Int gridPos = MapManager.instance.FloorMap.WorldToCell(transform.position);

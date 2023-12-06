@@ -41,12 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Entity
+    uniqueID: 1196655275
+    locked: 0
   - name: Fog
     uniqueID: 2326138515
     locked: 0
   - name: UI
     uniqueID: 1434841407
-    locked: 0
-  - name: Entity
-    uniqueID: 1196655275
     locked: 0

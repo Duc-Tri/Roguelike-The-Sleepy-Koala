@@ -121,7 +121,6 @@ public sealed class ProcGen
             MapManager.instance.ObstacleMap.SetTile(pos, null);
         }
         MapManager.instance.FloorMap.SetTile(pos, MapManager.instance.FloorTile);
-
     }
 
     private void PlaceEntities(RectangularRoom newRoom, int maxMonsters, int maxItemsPerRoom)
@@ -160,7 +159,6 @@ public sealed class ProcGen
             monster++;
         }
 
-
         for (int item = 0; item < numItems;)
         {
             int x = Random.Range(newRoom.X, newRoom.X + newRoom.Width);
@@ -180,7 +178,15 @@ public sealed class ProcGen
                 }
             }
 
-            MapManager.instance.CreateEntity("Potion of Health", new Vector2Int(x, y));
+            float randomValue = Random.value;
+            if (randomValue < 0.7f)
+                MapManager.instance.CreateEntity("Potion of Health", new Vector2Int(x, y));
+            else if (randomValue < 0.8f)
+                MapManager.instance.CreateEntity("Fireball Scroll", new Vector2Int(x, y));
+            else if (randomValue < 0.9f)
+                MapManager.instance.CreateEntity("Confusion Scroll", new Vector2Int(x, y));
+            else
+                MapManager.instance.CreateEntity("Lighting SCroll", new Vector2Int(x, y));
 
             item++;
         }

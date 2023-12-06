@@ -43,10 +43,10 @@ public class GameManager : MonoBehaviour
             isPlayerTurn = true;
         else
         {
-            if (actors[actorNum].GetComponent<HostileEnemy>())
-                actors[actorNum].GetComponent<HostileEnemy>().RunAI();
+            if (actors[actorNum].AI != null)
+                actors[actorNum].AI.RunAI();
             else
-                Action.SkipAction(); // ?
+                Action.WaitAction(); // ?
         }
     }
 
@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
         delayTime = SetTime();
     }
 
-    public Actor GetBlockingActorAtLocation(Vector3 location)
+    public Actor GetActorAtLocation(Vector3 location)
     {
         foreach (Actor actor in actors)
         {
