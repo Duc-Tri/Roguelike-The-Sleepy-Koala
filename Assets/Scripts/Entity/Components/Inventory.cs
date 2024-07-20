@@ -10,7 +10,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] private List<Item> items = new List<Item>();
 
     public int Capacity { get => capacity; }
-    public Consumable SelectedConsumable { get; set; }
+    public Consumable SelectedConsumable { get => selectedConsumable; set { selectedConsumable = value; } }
     public List<Item> Items { get => items; }
 
     public void Drop(Item item)
